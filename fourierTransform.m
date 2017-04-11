@@ -1,12 +1,5 @@
-%{
-       Анализ модельного сигнала и сигнала с шумом при помощи ДПФ
-       используется функция fft()
-       Author: I.Volodin
-       Date: 11.03.17 
-%}
- 
  clc;clear;close all;
-%% Генерирование массива аргументов в физическом пространстве
+%% generate a model signal in physical space
 step_t=0.001; 
 first_step=0;
 last_step=1;
@@ -23,7 +16,7 @@ subplot(2,1,1), plot(t,y); title('Signal  10*sin(2*pi*60*t) 1000 points')
 
 
 %% MatLab Guide
-% http://www.mathworks.com/help/matlab/ref/fft.html , см. также стр 63 Сергиенко
+% http://www.mathworks.com/help/matlab/ref/fft.html , Г±Г¬. ГІГ ГЄГ¦ГҐ Г±ГІГ° 63 Г‘ГҐГ°ГЈГЁГҐГ­ГЄГ®
 fourier=fft(y );     
 N_=length(fourier);
 f_ = (1 / step_t)  *   (   0:    (N_/2)   )    /    N_; 
@@ -38,11 +31,11 @@ amplitude_of_signal = abs(fourier)/N_; % normalization
 amplitude_of_signal = amplitude_of_signal(1:N_ /2+1);      
 amplitude_of_signal=amplitude_of_signal*2; % amplitude is split by two due to parity, half in negative part, half in positive, so we need only half multiply by two 
 
-%subplot(4,1,3), plot(f_ ,amplitude_of_signal ); title('Амплитуда сигнала независимых частот')
+%subplot(4,1,3), plot(f_ ,amplitude_of_signal ); title('ГЂГ¬ГЇГ«ГЁГІГіГ¤Г  Г±ГЁГЈГ­Г Г«Г  Г­ГҐГ§Г ГўГЁГ±ГЁГ¬Г»Гµ Г·Г Г±ГІГ®ГІ')
 %%
 % we better use loglog because if we have for instance Noise in our signal
 % it can be easily seen in Logarithmic scale
-% subplot(4,1,4),  loglog(f_,a);title('Спектральная мощность сигнала в логарифмическом масштабе')
+% subplot(4,1,4),  loglog(f_,a);title('Г‘ГЇГҐГЄГІГ°Г Г«ГјГ­Г Гї Г¬Г®Г№Г­Г®Г±ГІГј Г±ГЁГЈГ­Г Г«Г  Гў Г«Г®ГЈГ Г°ГЁГґГ¬ГЁГ·ГҐГ±ГЄГ®Г¬ Г¬Г Г±ГёГІГ ГЎГҐ')
 
 %% through autocorrelation function 
 % we have 1000 points, so ACF should be around 100 points
